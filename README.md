@@ -7,8 +7,10 @@ Command-line interface for the [PokeAPI](https://pokeapi.co/docs/v2). Fetches Po
 ## Installation
 
 ```bash
-# Global install
+# Global install (pick one)
 npm i -g pokeapi-cli
+pnpm add -g pokeapi-cli
+yarn global add pokeapi-cli
 
 # Run without global install
 npx pokeapi-cli pkmn pokemon pikachu
@@ -57,6 +59,16 @@ Pipe to [jq](https://jqlang.github.io/jq/) for field selection:
 ```bash
 pkmn pokemon pikachu | jq '.types'
 pkmn pokemon-species pikachu | jq '.genera'
+```
+
+## Agent skill
+
+This CLI ships an agent skill at [`skills/pokeapi-cli/SKILL.md`](skills/pokeapi-cli/SKILL.md) for any harness that supports the [Agent Skills specification](https://agentskills.io) (Claude Code, Cursor, Codex, and others).
+
+Install it with the [skills CLI](https://github.com/vercel-labs/skills):
+
+```bash
+npx skills add jpbullalayao/pokeapi-cli
 ```
 
 ## Development

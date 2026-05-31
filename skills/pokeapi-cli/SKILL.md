@@ -17,33 +17,6 @@ Command-line interface for the [PokeAPI](https://pokeapi.co/docs/v2): fetches Po
 
 ---
 
-## Prerequisites
-
-### Installation
-
-```bash
-# Global install (pick one)
-npm i -g pokeapi-cli
-pnpm add -g pokeapi-cli
-yarn global add pokeapi-cli
-
-# Run without global install
-npx -p pokeapi-cli pkmn --help
-```
-
-### Runtime
-
-- **Node.js** >= 18.17 (see package `engines`).
-
-### Verify
-
-```bash
-pkmn --version
-pkmn --help
-```
-
----
-
 ## Authentication
 
 PokeAPI is public and requires **no API key**.
@@ -111,8 +84,6 @@ When the user asks about…
 |-------|--------|
 | Pokemon typing, base stats, abilities, moves | `pkmn pokemon <name>` |
 | Evolution, egg groups, legendary/mythical, flavor text | `pkmn pokemon-species <name>` |
-| Type effectiveness (not in PokeAPI per-Pokemon) | Read `general/type-chart.md` |
-| Damage rolls, OHKO claims | Use calc MCP — never invent numbers |
 
 **Hard rule:** never guess base stats, typings, abilities, or learnsets — run `pkmn` and read the JSON.
 
