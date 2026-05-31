@@ -61,6 +61,16 @@ pkmn pokemon pikachu | jq '.types'
 pkmn pokemon-species pikachu | jq '.genera'
 ```
 
+## Agent skill
+
+This CLI ships an agent skill at [`skills/pokeapi-cli/SKILL.md`](skills/pokeapi-cli/SKILL.md) for any harness that supports the [Agent Skills specification](https://agentskills.io) (Claude Code, Cursor, Codex, and others).
+
+Install it with the [skills CLI](https://github.com/vercel-labs/skills):
+
+```bash
+npx skills add jpbullalayao/pokeapi-cli
+```
+
 ## Development
 
 ```bash
