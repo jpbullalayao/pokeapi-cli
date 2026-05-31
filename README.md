@@ -7,8 +7,10 @@ Command-line interface for the [PokeAPI](https://pokeapi.co/docs/v2). Fetches Po
 ## Installation
 
 ```bash
-# Global install
+# Global install (pick one)
 npm i -g pokeapi-cli
+pnpm add -g pokeapi-cli
+yarn global add pokeapi-cli
 
 # Run without global install
 npx pokeapi-cli pkmn pokemon pikachu

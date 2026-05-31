@@ -13,7 +13,7 @@
     "dist",
     "bin",
     "README.md",
-    "SKILL.md"
+    "skills"
   ],
   "scripts": {
     "build": "tsc -p .",
