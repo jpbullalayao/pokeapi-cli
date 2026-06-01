@@ -1,10 +1,10 @@
 ---
 name: pokeapi-cli
 description: >-
-  PokeAPI CLI reference for fetching Pokemon and Pokemon species data from
-  pokeapi.co. Use when the user mentions pokeapi-cli, pkmn, Pokemon base stats,
-  typing, abilities, moves, evolution, egg groups, or needs to look up canonical
-  Pokemon data from the command line or in agent workflows.
+  PokeAPI CLI reference for fetching Pokemon, Pokemon species, ability, and item
+  data from pokeapi.co. Use when the user mentions pokeapi-cli, pkmn, Pokemon base
+  stats, typing, abilities, moves, items, evolution, egg groups, or needs to look
+  up canonical Pokemon data from the command line or in agent workflows.
 ---
 
 # PokeAPI CLI (`pkmn`)
@@ -29,7 +29,8 @@ PokeAPI is public and requires **no API key**.
 pkmn                              # Root (default action shows help)
 ├── pokemon <nameOrId>            # GET /pokemon/{name}
 ├── pokemon-species <nameOrId>    # GET /pokemon-species/{name}
-└── ability <nameOrId>            # GET /ability/{name}
+├── ability <nameOrId>            # GET /ability/{name}
+└── item <nameOrId>               # GET /item/{name}
 ```
 
 ---
@@ -72,6 +73,18 @@ pkmn ability 22
 pkmn ability flame-body
 ```
 
+### `pkmn item <nameOrId>`
+
+Fetch an item by name or id. Returns item data from `GET /item/{name}`.
+
+**Includes:** cost, fling power/effect, attributes, category, effect/flavor text, held-by Pokemon.
+
+```bash
+pkmn item potion
+pkmn item 1
+pkmn item master-ball
+```
+
 ---
 
 ## Output
@@ -86,6 +99,7 @@ Use `jq` to select fields from the response:
 pkmn pokemon pikachu | jq '.stats'
 pkmn pokemon-species pikachu | jq '.evolution_chain.url'
 pkmn ability intimidate | jq '.effect_entries'
+pkmn item potion | jq '.effect_entries'
 ```
 
 ---
@@ -99,6 +113,7 @@ When the user asks about…
 | Pokemon typing, base stats, abilities, moves | `pkmn pokemon <name>` |
 | Evolution, egg groups, legendary/mythical, flavor text | `pkmn pokemon-species <name>` |
 | Ability effect text, which Pokemon have an ability | `pkmn ability <name>` |
+| Item cost, effects, attributes, which Pokemon hold an item | `pkmn item <name>` |
 
 **Hard rule:** never guess base stats, typings, abilities, or learnsets — run `pkmn` and read the JSON.
 

@@ -2,6 +2,7 @@
 import { Command } from 'commander';
 import { isCliError, writeCliError } from './core/errors.js';
 import { registerAbility } from './resources/ability.js';
+import { registerItem } from './resources/item.js';
 import { registerPokemonSpecies } from './resources/pokemon-species.js';
 import { registerPokemon } from './resources/pokemon.js';
 import { getVersion } from './util/version.js';
@@ -13,12 +14,13 @@ program.version(getVersion(), '-V, --version');
 program
   .name('pkmn')
   .description(
-    'Command-line interface for the PokeAPI (pokemon, pokemon-species, and ability endpoints).\n\nDocs: https://pokeapi.co/docs/v2',
+    'Command-line interface for the PokeAPI (pokemon, pokemon-species, ability, and item endpoints).\n\nDocs: https://pokeapi.co/docs/v2',
   );
 
 registerPokemon(program);
 registerPokemonSpecies(program);
 registerAbility(program);
+registerItem(program);
 
 program.addHelpText(
   'after',
@@ -31,6 +33,7 @@ Examples:
   $ pkmn pokemon pikachu
   $ pkmn pokemon-species pikachu
   $ pkmn ability intimidate
+  $ pkmn item potion
 `,
 );
 
