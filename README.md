@@ -33,6 +33,7 @@ pkmn --help
 |---------|----------|-------------|
 | `pkmn pokemon <nameOrId>` | `GET /pokemon/{name}` | Battle data: types, base stats, abilities, moves, sprites |
 | `pkmn pokemon-species <nameOrId>` | `GET /pokemon-species/{name}` | Species data: evolution, egg groups, flavor text, legendary flags |
+| `pkmn ability <nameOrId>` | `GET /ability/{name}` | Ability data: effect text, Pokemon with the ability, flavor text |
 
 ## Usage
 
@@ -40,10 +41,12 @@ pkmn --help
 # By name
 pkmn pokemon incineroar
 pkmn pokemon-species wormadam
+pkmn ability intimidate
 
 # By national dex id
 pkmn pokemon 727
 pkmn pokemon-species 413
+pkmn ability 22
 
 # Hyphenated names (spaces/underscores normalized automatically)
 pkmn pokemon "flutter mane"
@@ -59,6 +62,7 @@ Pipe to [jq](https://jqlang.github.io/jq/) for field selection:
 ```bash
 pkmn pokemon pikachu | jq '.types'
 pkmn pokemon-species pikachu | jq '.genera'
+pkmn ability intimidate | jq '.effect_entries'
 ```
 
 ## Agent skill
