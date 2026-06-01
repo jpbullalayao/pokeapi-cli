@@ -28,7 +28,8 @@ PokeAPI is public and requires **no API key**.
 ```
 pkmn                              # Root (default action shows help)
 ├── pokemon <nameOrId>            # GET /pokemon/{name}
-└── pokemon-species <nameOrId>    # GET /pokemon-species/{name}
+├── pokemon-species <nameOrId>    # GET /pokemon-species/{name}
+└── ability <nameOrId>            # GET /ability/{name}
 ```
 
 ---
@@ -59,6 +60,18 @@ pkmn pokemon-species 413
 pkmn pokemon-species pikachu
 ```
 
+### `pkmn ability <nameOrId>`
+
+Fetch an ability by name or id. Returns ability data from `GET /ability/{name}`.
+
+**Includes:** effect text, Pokemon that can have the ability, flavor text entries, generation, main-series flag.
+
+```bash
+pkmn ability intimidate
+pkmn ability 22
+pkmn ability flame-body
+```
+
 ---
 
 ## Output
@@ -72,6 +85,7 @@ Use `jq` to select fields from the response:
 ```bash
 pkmn pokemon pikachu | jq '.stats'
 pkmn pokemon-species pikachu | jq '.evolution_chain.url'
+pkmn ability intimidate | jq '.effect_entries'
 ```
 
 ---
@@ -84,6 +98,7 @@ When the user asks about…
 |-------|--------|
 | Pokemon typing, base stats, abilities, moves | `pkmn pokemon <name>` |
 | Evolution, egg groups, legendary/mythical, flavor text | `pkmn pokemon-species <name>` |
+| Ability effect text, which Pokemon have an ability | `pkmn ability <name>` |
 
 **Hard rule:** never guess base stats, typings, abilities, or learnsets — run `pkmn` and read the JSON.
 
@@ -107,4 +122,3 @@ Name normalization: spaces and underscores become hyphens; names are lowercased.
 ## Future commands (not yet implemented)
 
 - `pkmn move <name>` — move details
-- `pkmn ability <name>` — ability details
