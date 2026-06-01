@@ -35,6 +35,7 @@ pkmn --help
 | `pkmn pokemon-species <nameOrId>` | `GET /pokemon-species/{name}` | Species data: evolution, egg groups, flavor text, legendary flags |
 | `pkmn ability <nameOrId>` | `GET /ability/{name}` | Ability data: effect text, Pokemon with the ability, flavor text |
 | `pkmn item <nameOrId>` | `GET /item/{name}` | Item data: cost, fling, attributes, category, effect/flavor text, held-by |
+| `pkmn move <nameOrId>` | `GET /move/{name}` | Move data: power, PP, accuracy, type, damage class, effect, stat changes |
 
 ## Usage
 
@@ -44,12 +45,14 @@ pkmn pokemon incineroar
 pkmn pokemon-species wormadam
 pkmn ability intimidate
 pkmn item potion
+pkmn move flamethrower
 
 # By national dex id
 pkmn pokemon 727
 pkmn pokemon-species 413
 pkmn ability 22
 pkmn item 1
+pkmn move 53
 
 # Hyphenated names (spaces/underscores normalized automatically)
 pkmn pokemon "flutter mane"
@@ -67,6 +70,7 @@ pkmn pokemon pikachu | jq '.types'
 pkmn pokemon-species pikachu | jq '.genera'
 pkmn ability intimidate | jq '.effect_entries'
 pkmn item potion | jq '.effect_entries'
+pkmn move flamethrower | jq '.effect_entries'
 ```
 
 ## Agent skill

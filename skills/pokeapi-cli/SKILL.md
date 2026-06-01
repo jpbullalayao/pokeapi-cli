@@ -30,7 +30,8 @@ pkmn                              # Root (default action shows help)
 ├── pokemon <nameOrId>            # GET /pokemon/{name}
 ├── pokemon-species <nameOrId>    # GET /pokemon-species/{name}
 ├── ability <nameOrId>            # GET /ability/{name}
-└── item <nameOrId>               # GET /item/{name}
+├── item <nameOrId>               # GET /item/{name}
+└── move <nameOrId>               # GET /move/{name}
 ```
 
 ---
@@ -85,6 +86,18 @@ pkmn item 1
 pkmn item master-ball
 ```
 
+### `pkmn move <nameOrId>`
+
+Fetch a move by name or id. Returns move data from `GET /move/{name}`.
+
+**Includes:** power, PP, accuracy, priority, type, damage class, effect entries, stat changes, target, learned-by Pokemon.
+
+```bash
+pkmn move flamethrower
+pkmn move 53
+pkmn move close-combat
+```
+
 ---
 
 ## Output
@@ -100,6 +113,7 @@ pkmn pokemon pikachu | jq '.stats'
 pkmn pokemon-species pikachu | jq '.evolution_chain.url'
 pkmn ability intimidate | jq '.effect_entries'
 pkmn item potion | jq '.effect_entries'
+pkmn move flamethrower | jq '.effect_entries'
 ```
 
 ---
@@ -114,6 +128,7 @@ When the user asks about…
 | Evolution, egg groups, legendary/mythical, flavor text | `pkmn pokemon-species <name>` |
 | Ability effect text, which Pokemon have an ability | `pkmn ability <name>` |
 | Item cost, effects, attributes, which Pokemon hold an item | `pkmn item <name>` |
+| Move power, PP, accuracy, type, damage class, effects | `pkmn move <name>` |
 
 **Hard rule:** never guess base stats, typings, abilities, or learnsets — run `pkmn` and read the JSON.
 
@@ -131,9 +146,3 @@ Name normalization: spaces and underscores become hyphens; names are lowercased.
 | 4 | Validation error (malformed API response) |
 | 5 | API error |
 | 6 | Network error / timeout |
-
----
-
-## Future commands (not yet implemented)
-
-- `pkmn move <name>` — move details
