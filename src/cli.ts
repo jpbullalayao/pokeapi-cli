@@ -6,6 +6,7 @@ import { registerItem } from './resources/item.js';
 import { registerMove } from './resources/move.js';
 import { registerPokemonSpecies } from './resources/pokemon-species.js';
 import { registerPokemon } from './resources/pokemon.js';
+import { registerType } from './resources/type.js';
 import { getVersion } from './util/version.js';
 
 const program = new Command();
@@ -15,7 +16,7 @@ program.version(getVersion(), '-V, --version');
 program
   .name('pkmn')
   .description(
-    'Command-line interface for the PokeAPI (pokemon, pokemon-species, ability, item, and move endpoints).\n\nDocs: https://pokeapi.co/docs/v2',
+    'Command-line interface for the PokeAPI (pokemon, pokemon-species, ability, item, move, and type endpoints).\n\nDocs: https://pokeapi.co/docs/v2',
   );
 
 registerPokemon(program);
@@ -23,6 +24,7 @@ registerPokemonSpecies(program);
 registerAbility(program);
 registerItem(program);
 registerMove(program);
+registerType(program);
 
 program.addHelpText(
   'after',
@@ -37,6 +39,7 @@ Examples:
   $ pkmn ability intimidate
   $ pkmn item potion
   $ pkmn move flamethrower
+  $ pkmn type fire
 `,
 );
 
