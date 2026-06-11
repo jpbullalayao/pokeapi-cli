@@ -2,18 +2,18 @@
 
 Command-line interface for the [PokeAPI](https://pokeapi.co/docs/v2). Fetches Pokemon data and prints the **exact, untransformed JSON** response from the API.
 
-**Binary:** `pkmn` · **Package:** `pokeapi-cli` on npm
+**Binary:** `pkmn` · **Package:** `@professorragna/pokeapi-cli` on npm
 
 ## Installation
 
 ```bash
 # Global install (pick one)
-npm i -g pokeapi-cli
-pnpm add -g pokeapi-cli
-yarn global add pokeapi-cli
+npm i -g @professorragna/pokeapi-cli
+pnpm add -g @professorragna/pokeapi-cli
+yarn global add @professorragna/pokeapi-cli
 
 # Run without global install
-npx pokeapi-cli pkmn pokemon pikachu
+npx @professorragna/pokeapi-cli pkmn pokemon pikachu
 ```
 
 ### Prerequisites

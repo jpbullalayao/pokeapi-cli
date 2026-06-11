@@ -1,5 +1,5 @@
 {
-  "name": "pokeapi-cli",
+  "name": "@professorragna/pokeapi-cli",
   "version": "0.1.0",
   "description": "CLI for the PokeAPI (pokemon and pokemon-species endpoints).",
   "type": "module",
@@ -29,6 +29,9 @@
     "cli"
   ],
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/jpbullalayao/pokeapi-cli.git"
