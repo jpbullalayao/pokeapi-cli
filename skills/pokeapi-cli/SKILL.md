@@ -1,10 +1,10 @@
 ---
 name: pokeapi-cli
 description: >-
-  PokeAPI CLI reference for fetching Pokemon, Pokemon species, ability, and item
-  data from pokeapi.co. Use when the user mentions pokeapi-cli, pkmn, Pokemon base
-  stats, typing, abilities, moves, items, evolution, egg groups, or needs to look
-  up canonical Pokemon data from the command line or in agent workflows.
+  PokeAPI CLI reference for fetching Pokemon, Pokemon species, ability, item, move,
+  and type data from pokeapi.co. Use when the user mentions pokeapi-cli, pkmn, Pokemon base
+  stats, typing, type matchups, weaknesses, resistances, abilities, moves, items, evolution,
+  egg groups, or needs to look up canonical Pokemon data from the command line or in agent workflows.
 ---
 
 # PokeAPI CLI (`pkmn`)
@@ -31,7 +31,8 @@ pkmn                              # Root (default action shows help)
 ├── pokemon-species <nameOrId>    # GET /pokemon-species/{name}
 ├── ability <nameOrId>            # GET /ability/{name}
 ├── item <nameOrId>               # GET /item/{name}
-└── move <nameOrId>               # GET /move/{name}
+├── move <nameOrId>               # GET /move/{name}
+└── type <nameOrId>               # GET /type/{name}
 ```
 
 ---
@@ -98,6 +99,18 @@ pkmn move 53
 pkmn move close-combat
 ```
 
+### `pkmn type <nameOrId>`
+
+Fetch a type by name or id. Returns type data from `GET /type/{name}`.
+
+**Includes:** damage relations (offensive/defensive), past damage relations, generation, move damage class, Pokemon of the type, moves of the type.
+
+```bash
+pkmn type fire
+pkmn type 10
+pkmn type ground
+```
+
 ---
 
 ## Output
@@ -114,6 +127,7 @@ pkmn pokemon-species pikachu | jq '.evolution_chain.url'
 pkmn ability intimidate | jq '.effect_entries'
 pkmn item potion | jq '.effect_entries'
 pkmn move flamethrower | jq '.effect_entries'
+pkmn type fire | jq '.damage_relations'
 ```
 
 ---
@@ -129,6 +143,7 @@ When the user asks about…
 | Ability effect text, which Pokemon have an ability | `pkmn ability <name>` |
 | Item cost, effects, attributes, which Pokemon hold an item | `pkmn item <name>` |
 | Move power, PP, accuracy, type, damage class, effects | `pkmn move <name>` |
+| Type matchups, weaknesses, resistances, Pokemon/moves of a type | `pkmn type <name>` |
 
 **Hard rule:** never guess base stats, typings, abilities, or learnsets — run `pkmn` and read the JSON.
 
