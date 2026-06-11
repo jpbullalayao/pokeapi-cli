@@ -20,7 +20,7 @@ function buildUrl(path: string): string {
 }
 
 function userAgent(): string {
-  return `pokeapi-cli/${getVersion()} node/${process.version}`;
+  return `@professorragna/pokeapi-cli/${getVersion()} node/${process.version}`;
 }
 
 export class ApiClient {
