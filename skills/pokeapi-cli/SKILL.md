@@ -132,6 +132,30 @@ pkmn type fire | jq '.damage_relations'
 
 ---
 
+## Complete learnsets (pre-evolution + egg moves)
+
+`pkmn pokemon <name>` returns ONLY the moves that form learns **directly**. PokeAPI deliberately excludes moves inherited from pre-evolutions, and egg-move data on evolved forms is incomplete. A single call therefore **undercounts** the real learnset — e.g. Kingambit omits Sucker Punch (only Pawniard learns it); Lucario omits Riolu's egg moves like High Jump Kick.
+
+To get every move a Pokemon can have, union the whole evolution line:
+
+1. **Walk back the chain** until there is no pre-evolution (repeat on each result):
+
+```bash
+pkmn pokemon-species <name> | jq -r '.evolves_from_species.name // empty'
+```
+
+2. **Resolve regional forms** — the bare species name often resolves to the wrong form. Confirm the form that actually evolves: `basculin` → `basculin-white-striped` (Basculegion line), `sneasel` → `sneasel-hisui` (Sneasler line); some finals need a suffix, e.g. `basculegion-male`.
+
+3. **Union + dedupe** move names across every stage:
+
+```bash
+for f in riolu lucario; do pkmn pokemon "$f" | jq -r '.moves[].move.name'; done | sort -u
+```
+
+Filter by game/method via each move's `version_group_details[]` (`.version_group.name`, `.move_learn_method.name`, `.level_learned_at`). Caveat (Gen 9): in `scarlet-violet`, Move Reminder moves are reported under the `egg` method, so `egg` does not mean purely breeding.
+
+---
+
 ## Agent routing
 
 When the user asks about…
@@ -144,8 +168,9 @@ When the user asks about…
 | Item cost, effects, attributes, which Pokemon hold an item | `pkmn item <name>` |
 | Move power, PP, accuracy, type, damage class, effects | `pkmn move <name>` |
 | Type matchups, weaknesses, resistances, Pokemon/moves of a type | `pkmn type <name>` |
+| ALL moves a Pokemon can learn / complete learnset | union the evolution line (see Complete learnsets) |
 
-**Hard rule:** never guess base stats, typings, abilities, or learnsets — run `pkmn` and read the JSON.
+**Hard rule:** never guess base stats, typings, abilities, or learnsets — run `pkmn` and read the JSON. For a *complete* movepool, never trust a single `pkmn pokemon` call; union the full evolution line (see Complete learnsets).
 
 Name normalization: spaces and underscores become hyphens; names are lowercased. Numeric ids pass through unchanged.
 
