@@ -90,11 +90,27 @@ npx skills add jpbullalayao/pokeapi-cli
 ## Development
 
 ```bash
-cd general/pokeapi-cli
 npm install
 npm run build
 node bin/pkmn.js pokemon pikachu
+npm test
 ```
+
+## Releasing
+
+Pushing a semver tag (`v*`) triggers [`.github/workflows/publish.yml`](.github/workflows/publish.yml) to build, test, and publish to npm with provenance.
+
+### Cut a release
+
+The tag must match the version in `package.json` (e.g. tag `v1.0.0` requires `"version": "1.0.0"`).
+
+```bash
+npm version patch   # or minor / major — updates package.json and package-lock.json
+git push origin main
+git push origin vX.Y.Z
+```
+
+The workflow validates the tag, runs `npm ci && npm test`, then publishes. Confirm at [npmjs.com/package/@professorragna/pokeapi-cli](https://www.npmjs.com/package/@professorragna/pokeapi-cli).
 
 ## License
 
