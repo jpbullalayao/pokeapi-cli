@@ -2,9 +2,9 @@
 name: pokeapi-cli
 description: >-
   PokeAPI CLI reference for fetching Pokemon, Pokemon species, ability, item, move,
-  and type data from pokeapi.co. Use when the user mentions pokeapi-cli, pkmn, Pokemon base
+  type data, and sprite URLs from pokeapi.co. Use when the user mentions pokeapi-cli, pkmn, Pokemon base
   stats, typing, type matchups, weaknesses, resistances, abilities, moves, items, evolution,
-  egg groups, or needs to look up canonical Pokemon data from the command line or in agent workflows.
+  egg groups, sprites, sprite URLs, or needs to look up canonical Pokemon data from the command line or in agent workflows.
 ---
 
 # PokeAPI CLI (`pkmn`)
@@ -32,8 +32,11 @@ pkmn                              # Root (default action shows help)
 ├── ability <nameOrId>            # GET /ability/{name}
 ├── item <nameOrId>               # GET /item/{name}
 ├── move <nameOrId>               # GET /move/{name}
-└── type <nameOrId>               # GET /type/{name}
+├── type <nameOrId>               # GET /type/{name}
+└── sprites [flags]               # Resolve a sprite URL (plain text output)
 ```
+
+For sprite URL details, see [sprites.md](./sprites.md).
 
 ---
 
@@ -111,11 +114,24 @@ pkmn type 10
 pkmn type ground
 ```
 
+### `pkmn sprites`
+
+Resolve a single sprite URL for a Pokemon or item. Prints a **plain URL string** to stdout (not JSON). See [sprites.md](./sprites.md) for the full flag reference.
+
+```bash
+pkmn sprites --pokemon pikachu
+pkmn sprites --pokemon pikachu --shiny
+pkmn sprites --pokemon pikachu --official-artwork
+pkmn sprites --pokemon pikachu --generation v --game black-white
+pkmn sprites --item potion
+```
+
 ---
 
 ## Output
 
-- **Success:** raw PokeAPI JSON to stdout (2-space indentation). Keys are snake_case exactly as the API returns them. No transformation.
+- **Success (most commands):** raw PokeAPI JSON to stdout (2-space indentation). Keys are snake_case exactly as the API returns them. No transformation.
+- **Success (`sprites`):** a single sprite URL string to stdout (plain text, not JSON). See [sprites.md](./sprites.md).
 - **Error:** JSON object to stderr with `error.code`, `error.message`, and non-zero exit code.
 - **404:** `error.code` is `not-found` when the name or id does not exist.
 
@@ -168,6 +184,7 @@ When the user asks about…
 | Item cost, effects, attributes, which Pokemon hold an item | `pkmn item <name>` |
 | Move power, PP, accuracy, type, damage class, effects | `pkmn move <name>` |
 | Type matchups, weaknesses, resistances, Pokemon/moves of a type | `pkmn type <name>` |
+| Sprite URL for a Pokemon or item | `pkmn sprites --pokemon <name>` or `pkmn sprites --item <name>` — see [sprites.md](./sprites.md) |
 | ALL moves a Pokemon can learn / complete learnset | union the evolution line (see Complete learnsets) |
 
 **Hard rule:** never guess base stats, typings, abilities, or learnsets — run `pkmn` and read the JSON. For a *complete* movepool, never trust a single `pkmn pokemon` call; union the full evolution line (see Complete learnsets).

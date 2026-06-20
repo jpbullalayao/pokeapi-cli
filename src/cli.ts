@@ -6,6 +6,7 @@ import { registerItem } from './resources/item.js';
 import { registerMove } from './resources/move.js';
 import { registerPokemonSpecies } from './resources/pokemon-species.js';
 import { registerPokemon } from './resources/pokemon.js';
+import { registerSprites } from './resources/sprites.js';
 import { registerType } from './resources/type.js';
 import { getVersion } from './util/version.js';
 
@@ -16,7 +17,7 @@ program.version(getVersion(), '-V, --version');
 program
   .name('pkmn')
   .description(
-    'Command-line interface for the PokeAPI (pokemon, pokemon-species, ability, item, move, and type endpoints).\n\nDocs: https://pokeapi.co/docs/v2',
+    'Command-line interface for the PokeAPI (pokemon, pokemon-species, ability, item, move, type, and sprites endpoints).\n\nDocs: https://pokeapi.co/docs/v2',
   );
 
 registerPokemon(program);
@@ -25,12 +26,14 @@ registerAbility(program);
 registerItem(program);
 registerMove(program);
 registerType(program);
+registerSprites(program);
 
 program.addHelpText(
   'after',
   `
 Output:
   Commands print the raw PokeAPI JSON response to stdout (2-space indentation).
+  The sprites command prints a single URL string to stdout instead.
   Errors are written to stderr as JSON with a non-zero exit code.
 
 Examples:
@@ -40,6 +43,8 @@ Examples:
   $ pkmn item potion
   $ pkmn move flamethrower
   $ pkmn type fire
+  $ pkmn sprites --pokemon pikachu
+  $ pkmn sprites --item potion
 `,
 );
 
