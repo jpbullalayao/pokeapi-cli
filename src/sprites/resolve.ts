@@ -31,33 +31,16 @@ const GENERATION_BY_ROMAN: Record<string, string> = {
   ix: 'generation-ix',
 };
 
-const GENERATION_BY_ARABIC: Record<string, string> = {
-  '1': 'generation-i',
-  '2': 'generation-ii',
-  '3': 'generation-iii',
-  '4': 'generation-iv',
-  '5': 'generation-v',
-  '6': 'generation-vi',
-  '7': 'generation-vii',
-  '8': 'generation-viii',
-  '9': 'generation-ix',
-};
-
 export function normalizeGeneration(input: string): string {
-  const trimmed = input.trim().toLowerCase();
-  if (trimmed.startsWith('generation-')) {
-    return trimmed;
+  const key = input.trim().toLowerCase();
+  const generation = GENERATION_BY_ROMAN[key];
+  if (!generation) {
+    throw new CliError(`Invalid generation: ${input}`, {
+      code: 'usage-error',
+      hint: 'Use roman numerals i through ix (e.g. v for Gen 5)',
+    });
   }
-  if (GENERATION_BY_ARABIC[trimmed]) {
-    return GENERATION_BY_ARABIC[trimmed];
-  }
-  if (GENERATION_BY_ROMAN[trimmed]) {
-    return GENERATION_BY_ROMAN[trimmed];
-  }
-  throw new CliError(`Invalid generation: ${input}`, {
-    code: 'usage-error',
-    hint: 'Use roman numerals (i–ix), arabic (1–9), or full slug (generation-v)',
-  });
+  return generation;
 }
 
 export function normalizeGameSlug(input: string): string {

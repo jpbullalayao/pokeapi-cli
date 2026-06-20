@@ -147,7 +147,7 @@ export function registerSprites(program: Command) {
     .option('--home', 'Pokemon Home sprite')
     .option('--dream-world', 'Dream World SVG sprite')
     .option('--showdown', 'Smogon Showdown sprite')
-    .option('--generation <gen>', 'Generation (i–ix, 1–9, or generation-v)')
+    .option('--generation <gen>', 'Generation (roman numerals i–ix)')
     .option('--game <slug>', 'Game slug under generation (e.g. black-white, red-blue)')
     .addHelpText(
       'after',

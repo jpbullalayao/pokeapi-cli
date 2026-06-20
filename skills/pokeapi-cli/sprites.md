@@ -74,7 +74,7 @@ pkmn sprites --pokemon pikachu --generation iii --game ruby-sapphire --back
 pkmn sprites --pokemon pikachu --generation i --game red-blue --back
 ```
 
-**Generation input:** roman numerals (`v`, `iii`), arabic (`5`, `3`), or full slug (`generation-v`).
+**Generation input:** roman numerals only (`i` through `ix`, e.g. `v` for Gen 5). For full API paths like `generation-v`, use `--path` instead.
 
 **Game slug:** hyphenated API key verbatim (lowercased). Valid values per generation:
 
