@@ -37,6 +37,7 @@ pkmn --help
 | `pkmn item <nameOrId>` | `GET /item/{name}` | Item data: cost, fling, attributes, category, effect/flavor text, held-by |
 | `pkmn move <nameOrId>` | `GET /move/{name}` | Move data: power, PP, accuracy, type, damage class, effect, stat changes |
 | `pkmn type <nameOrId>` | `GET /type/{name}` | Type data: damage relations (offensive/defensive), generation, move damage class, Pokemon and moves of the type |
+| `pkmn sprites [flags]` | `GET /pokemon` or `GET /item` | Resolve a single sprite URL (plain text output; see [skills/pokeapi-cli/sprites.md](skills/pokeapi-cli/sprites.md)) |
 
 ## Usage
 
@@ -60,11 +61,16 @@ pkmn type 10
 # Hyphenated names (spaces/underscores normalized automatically)
 pkmn pokemon "flutter mane"
 pkmn pokemon flutter-mane
+
+# Sprite URLs (plain text output)
+pkmn sprites --pokemon pikachu
+pkmn sprites --pokemon pikachu --generation v --game black-white --shiny
+pkmn sprites --item potion
 ```
 
 ## Output
 
-Commands print the **raw PokeAPI JSON** to stdout with 2-space indentation. Keys and values are exactly as returned by the API (snake_case, no transformation). Errors are written to stderr as JSON with a non-zero exit code.
+Commands print the **raw PokeAPI JSON** to stdout with 2-space indentation. Keys and values are exactly as returned by the API (snake_case, no transformation). The `sprites` command prints a single URL string instead — see [skills/pokeapi-cli/sprites.md](skills/pokeapi-cli/sprites.md). Errors are written to stderr as JSON with a non-zero exit code.
 
 Pipe to [jq](https://jqlang.github.io/jq/) for field selection:
 
