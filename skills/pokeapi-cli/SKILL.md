@@ -13,7 +13,7 @@ Command-line interface for the [PokeAPI](https://pokeapi.co/docs/v2): fetches Po
 
 **API documentation:** [pokeapi.co/docs/v2](https://pokeapi.co/docs/v2)
 
-**Package:** `@professorragna/pokeapi-cli` on npm · **Binary:** `pkmn` · **Current version:** 1.0.0 (see `pkmn --version` after install)
+**Package:** `@professorragna/pokeapi-cli` on npm · **Binary:** `pkmn` · Run `pkmn --version` after install for the current version
 
 ---
 
