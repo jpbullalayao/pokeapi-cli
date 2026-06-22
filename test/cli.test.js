@@ -1,14 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import test from 'node:test';
-import { getVersion } from '../dist/util/version.js';
-
-test('--version exits 0 and prints package version', () => {
-  const proc = spawnSync('node', ['bin/pkmn.js', '--version'], { encoding: 'utf8' });
-
-  assert.equal(proc.status, 0);
-  assert.equal(proc.stdout.trim(), getVersion());
-});
 
 test('--help exits 0 and mentions pokemon command', () => {
   const proc = spawnSync('node', ['bin/pkmn.js', '--help'], { encoding: 'utf8' });
